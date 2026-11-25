@@ -1,20 +1,4 @@
-# ------------------------------------------------------------
-# Project  : Duplicate Data Finder (PS No. 27)
-# Language : Python 3
-# Concepts : Lists, Sets, Loops, File Handling
-# ------------------------------------------------------------
-# What it does:
-#   1. Reads a text file (one entry per line) into a list
-#   2. Finds the unique entries using a set
-#   3. Counts how many times each entry repeats using a loop
-#   4. Shows total, unique and duplicate counts
-#   5. Saves the unique entries to unique.txt
-# ------------------------------------------------------------
-
-
 def read_entries(file_name):
-    """Read the file and return a list of entries (one per line).
-    Returns None if the file does not exist."""
     try:
         file = open(file_name, "r", encoding="utf-8")
         lines = file.readlines()
@@ -31,8 +15,8 @@ def read_entries(file_name):
 
     entries = []
     for line in lines:
-        text = line.strip()          # remove \n and spaces at the ends
-        if text != "":               # skip blank lines
+        text = line.strip()          
+        if text != "":               
             entries.append(text)
     return entries
 
@@ -40,7 +24,7 @@ def read_entries(file_name):
 def clean_entry(text):
     """Ignore-case mode: make lowercase and remove extra spaces.
     Example: '  Apple   Pie ' -> 'apple pie'"""
-    words = text.lower().split()     # split() also removes extra spaces
+    words = text.lower().split()    
     return " ".join(words)
 
 
@@ -109,7 +93,7 @@ def main():
     print("      DUPLICATE DATA FINDER")
     print("=" * 40)
 
-    # Step 1: ask for a valid file name (repeat until the file exists)
+   
     while True:
         file_name = input("Enter file name (e.g. data.txt): ").strip()
         entries = read_entries(file_name)
@@ -118,12 +102,12 @@ def main():
         else:
             break
 
-    # Step 2: empty file check
+    
     if len(entries) == 0:
         print("File is empty. Nothing to check.")
         return
 
-    # Step 3: menu
+    
     print("\nMenu")
     print("1. Exact match")
     print("2. Ignore case and extra spaces")
@@ -133,10 +117,10 @@ def main():
             break
         print("Invalid choice. Please enter 1 or 2.")
 
-    # Step 4: prepare the entries according to the option
+    
     entries, unique_list, duplicates = process_entries(entries, ignore_case_and_spaces=(choice == "2"))
 
-    # Step 5: find unique + duplicates, show report, save file
+  
     print()
     show_report(entries, unique_list, duplicates)
 
